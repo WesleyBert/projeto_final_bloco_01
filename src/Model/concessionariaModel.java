@@ -2,15 +2,15 @@ package Model;
 
 public abstract class concessionariaModel {
   
-  private int placa;
+  private int renavam;
 	private String modelo;
 	private String cambio;
 	private String titular;
 	private boolean disponivel;
 	private int doc;
 
-	public concessionariaModel(int placa, String modelo, String cambio, String titular, boolean disponivel, int doc) {
-		this.placa = placa;
+	public concessionariaModel(int renavam, String modelo, String cambio, String titular, boolean disponivel, int doc) {
+		this.renavam = renavam;
 		this.modelo = modelo;
 		this.cambio = cambio;
 		this.titular = titular;
@@ -26,12 +26,12 @@ public abstract class concessionariaModel {
 		this.doc = doc;
 	}
 
-	public int getPlaca() {
-		return placa;
+	public int getRenavam() {
+		return renavam;
 	}
 
-	public void setPlaca(int placa) {
-		this.placa = placa;
+	public void setRenava(int renavam) {
+		this.renavam = renavam;
 	}
 
 	public String getModelo() {
@@ -95,7 +95,7 @@ public abstract class concessionariaModel {
 		System.out.println("\n\n***********************************************************");
 		System.out.println("Dados da Conta:");
 		System.out.println("***********************************************************");
-		System.out.println("Numero da Conta: " + this.placa);
+		System.out.println("Numero da Conta: " + this.renavam);
 		System.out.println("Agência: " + this.modelo);
 		System.out.println("Tipo da Conta: " + cambio);
 		System.out.println("Titular: " + this.titular);

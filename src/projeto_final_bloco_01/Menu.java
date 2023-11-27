@@ -2,9 +2,17 @@ package projeto_final_bloco_01;
 
 import java.util.Scanner;
 
+import Controller.concessionariaController;
+import Repository.concessionariaRepository;
+import Model.concessionariaModel;
+
+
+
 public class Menu {
 
 		public static void main(String[] args) {
+			
+			concessionariaController carros = new concessionariaController();
 
 			Scanner leia = new Scanner(System.in);
 
@@ -43,12 +51,15 @@ public class Menu {
 
 				switch (opcao) {
 					case 1:
-						System.out.println("Criar Conta\n\n");
+						System.out.println("cadastrar Automovel\n\n");
+						
+						System.out.println("Digite o numero do renavam: ");
+						renavam = leia.nextInt();
 
 						break;
 					case 2:
 						System.out.println("Listar todas as Carros\n\n");
-
+							carros.listarTodas();
 						break;
 					case 3:
 						System.out.println("Consultar dados do Carro - por Placa\n\n");
