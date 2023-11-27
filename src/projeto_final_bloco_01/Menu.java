@@ -18,7 +18,7 @@ public class Menu {
 				System.out.println("                                                     ");
 				System.out.println("*****************************************************");
 				System.out.println("                                                     ");
-				System.out.println("            1 - Criar Conta de Comprador             ");
+				System.out.println("            1 - Cadastrar Veiculo		             ");
 				System.out.println("            2 - Listar Todas os Carros               ");
 				System.out.println("            3 - Buscar Carro por Placa               ");
 				System.out.println("            4 - Atualizar Dados do Comprador         ");
@@ -89,3 +89,5 @@ public class Menu {
 			System.out.println("*********************************************************");
 		}
 	}
+	
+	
