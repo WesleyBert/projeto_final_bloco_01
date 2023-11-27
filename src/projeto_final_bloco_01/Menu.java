@@ -1,104 +1,109 @@
 package projeto_final_bloco_01;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Controller.concessionariaController;
-import Repository.concessionariaRepository;
-import Model.concessionariaModel;
-
-
+import Model.automovel;
 
 public class Menu {
 
-		public static void main(String[] args) {
-			
-			concessionariaController carros = new concessionariaController();
+    public static void keyPress() {
+        try {
+            System.out.println("\nPressione Enter para continuar...");
+            System.in.read();
+        } catch (IOException e) {
+            System.out.println("Você pressionou uma tecla diferente de enter!");
+        }
+    }
 
-			Scanner leia = new Scanner(System.in);
+    public static void main(String[] args) {
+        concessionariaController carros = new concessionariaController();
+        Scanner leia = new Scanner(System.in);
 
-			int opcao;
+        boolean disponivel = false;
+        String modelo = null, cambio = null, titular, novoDono;
+        int opcao, renavam, doc = 0, ano;
 
-			while (true) {
+        while (true) {
+            System.out.println("*****************************************************");
+            System.out.println("                Agencia de Carros                ");
+            System.out.println("*****************************************************");
+            System.out.println("            1 - Cadastrar Veiculo                  ");
+            System.out.println("            2 - Listar Todas os Carros            ");
+            System.out.println("            3 - Buscar numero da conta            ");
+            System.out.println("            4 - Atualizar Dados do Comprador      ");
+            System.out.println("            5 - Apagar Conta                      ");
+            System.out.println("            6 - Desejo Comprar um carro           ");
+            System.out.println("            7 - Desejo Vender meu Carro           ");
+            System.out.println("            8 - Transferir nome do proprietario   ");
+            System.out.println("            9 - Sair                              ");
+            System.out.println("*****************************************************");
+            System.out.println("Entre com a opção que deseja realizar: ");
 
-				System.out.println("*****************************************************");
-				System.out.println("                                                     ");
-				System.out.println("                Agencia de Carros                ");
-				System.out.println("                                                     ");
-				System.out.println("*****************************************************");
-				System.out.println("                                                     ");
-				System.out.println("            1 - Cadastrar Veiculo		             ");
-				System.out.println("            2 - Listar Todas os Carros               ");
-				System.out.println("            3 - Buscar Carro por Placa               ");
-				System.out.println("            4 - Atualizar Dados do Comprador         ");
-				System.out.println("            5 - Apagar Conta                         ");
-				System.out.println("            6 - Desejo Comprar um carro              ");
-				System.out.println("            7 - Desejo Vender meu Carro              ");
-				System.out.println("            8 - Transferir nome do proprietario     ");
-				System.out.println("            9 - Sair                                 ");
-				System.out.println("                                                     ");
-				System.out.println("*****************************************************");
-				System.out.println("Entre com a opção  que desejada realizar:                          ");
-				System.out.println("                                                     ");
+            try {
+                opcao = leia.nextInt();
 
-				opcao = leia.nextInt();
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Cadastrar Automovel\n\n");
+                        System.out.println("\nDigite o numero do renavam: ");
+                        renavam = leia.nextInt();
 
-				if (opcao == 9) {
-					System.out.println("\nObrigado por Escolher a nossa Agencia! Volte sempre!");
-					sobre();
-	                 leia.close();
-					System.exit(0);
-				}
+                        leia.nextLine(); // Limpa o buffer
+                        System.out.println("\nDigite a marca do carro: ");
+                        modelo = leia.nextLine();
 
-				switch (opcao) {
-					case 1:
-						System.out.println("cadastrar Automovel\n\n");
-						
-						System.out.println("Digite o numero do renavam: ");
-						renavam = leia.nextInt();
+                        System.out.println("\nDigite o ano do carro: ");
+                        ano = leia.nextInt();
 
-						break;
-					case 2:
-						System.out.println("Listar todas as Carros\n\n");
-							carros.listarTodas();
-						break;
-					case 3:
-						System.out.println("Consultar dados do Carro - por Placa\n\n");
+                        leia.nextLine(); // Limpa o buffer
+                        System.out.println("\nDigite o nome do titular: ");
+                        titular = leia.nextLine();
 
-						break;
-					case 4:
-						System.out.println("Atualizar dados da Conta\n\n");
+                        do {
+                            System.out.println("Documento do carro está em dia ?");
+                            System.out.println(" 1 - SIM ");
+                            System.out.println(" 2 - NÃO");
+                            doc = leia.nextInt();
+                        } while (doc < 1 || doc > 2);
 
-						break;
-					case 5:
-						System.out.println("Apagar a Conta\n\n");
+                        leia.nextLine(); // Limpa o buffer
+                        System.out.println("Digite o tipo de cambio do carro: ");
+                        cambio = leia.nextLine();
 
-						break;
-					case 6:
-						System.out.println("Comprar Carro\n\n");
+                        disponivel = (doc == 1);
+                        carros.cadastrarVeiculo(new automovel(carros.gerarnumero(), modelo, cambio, titular, disponivel, renavam, ano));
+                        System.out.println("Carro cadastrado com sucesso!!");
+                        keyPress();
+                        break;
 
-						break;
-					case 7:
-						System.out.println("Vender Carro\n\n");
+                    // outros cases ...
 
-						break;
-					case 8:
-						System.out.println("Transferência entre Proprietarios\n\n");
+                    case 9:
+                        System.out.println("\nObrigado por Escolher a nossa Agencia! Volte sempre!");
+                        sobre();
+                        leia.close();
+                        System.exit(0);
+                        break;
 
-						break;
-					default:
-						System.out.println("\nOpção Inválida!\n");
-						break;
-				}
-			}
-		}
-	    
-		public static void sobre() {
-			System.out.println("\n*********************************************************");
-			System.out.println("Projeto Desenvolvido por: Wesley Francisco Berto");
-			System.out.println("https://www.linkedin.com/in/wesley-berto/");
-			System.out.println("https://github.com/WesleyBert");
-			System.out.println("*********************************************************");
-		}
-	}
-	
-	
+                    default:
+                        System.out.println("\nOpção Inválida!\n");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\nDigite valores inteiros.");
+                leia.nextLine(); // Limpa o buffer
+            }
+        }
+    }
+
+    public static void sobre() {
+        System.out.println("\n*********************************************************");
+        System.out.println("Projeto Desenvolvido por: Wesley Francisco Berto");
+        System.out.println("https://www.linkedin.com/in/wesley-berto/");
+        System.out.println("https://github.com/WesleyBert");
+        System.out.println("*********************************************************");
+    }
+}

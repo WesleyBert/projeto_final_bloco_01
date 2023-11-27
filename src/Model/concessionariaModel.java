@@ -2,20 +2,22 @@ package Model;
 
 public abstract class concessionariaModel {
   
-  private int renavam;
+	private int renavam;
 	private String modelo;
 	private String cambio;
 	private String titular;
+	private int ano;
 	private boolean disponivel;
 	private int doc;
 
-	public concessionariaModel(int renavam, String modelo, String cambio, String titular, boolean disponivel, int doc) {
+	public concessionariaModel(int renavam, String modelo, String cambio, String titular, boolean disponivel, int doc, int ano) {
 		this.renavam = renavam;
 		this.modelo = modelo;
 		this.cambio = cambio;
 		this.titular = titular;
 		this.disponivel = disponivel;
 		this.doc = doc;
+		this.ano = ano;
 	}
 
 	public int getDoc() {
@@ -101,6 +103,14 @@ public abstract class concessionariaModel {
 		System.out.println("Titular: " + this.titular);
 		System.out.println("Saldo: " + this.comprar(disponivel));
 
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
   
 }

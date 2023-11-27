@@ -5,7 +5,7 @@ import Model.concessionariaModel;
 public interface concessionariaRepository {
 
 	// CRUD da Conta
-		public void procurarPorPlaca(int placa);
+		public void procurarPorRenavam(int renavam);
 		public void listarTodas();
 		public void cadastrarVeiculo(concessionariaModel concessionaria);
 		public void atualizar(concessionariaModel concessionaria);
@@ -15,4 +15,5 @@ public interface concessionariaRepository {
 		public void comprar(boolean disponivel);
 		public void vender(boolean doc, boolean licenciamento);
 		public void transferirProprietario(String antigoDono, String novoDono, int placa);
+		
 }

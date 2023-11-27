@@ -3,9 +3,8 @@ package Model;
 public class automovel extends concessionariaModel {
 
 
-	    public automovel(int placa, String modelo, String cambio, String titular, boolean disponivel, int doc) {
-		super(placa, modelo, cambio, titular, disponivel, doc);
-		// TODO Auto-generated constructor stub
+	    public automovel(int renavam, String modelo, String cambio, String titular, boolean disponivel, int doc, int ano) {
+		super(renavam, modelo, cambio, titular, disponivel, doc,ano);
 	}
 
 		private boolean licenciamento;
@@ -29,7 +28,16 @@ public class automovel extends concessionariaModel {
 	    }
 
 	    public void visualizar() {
-	        super.visualizar();
+	        System.out.println("\n\n***********************************************************");
+			System.out.println("Dados da Conta:");
+			System.out.println("***********************************************************");
+			System.out.println("Numero do renavam: " + this.getRenavam());
+			System.out.println("modelo: " + this.getModelo());
+			System.out.println("Tipo de cambio: " + getCambio());
+			System.out.println("Titular: " + this.getTitular());
+			System.out.println("Disponivel " + this.getDisponivel());
+			System.out.println("documento: " + this.getDoc());
+			System.out.println("ano: " + this.getAno());
 	        System.out.println("Licenciamento: " + (this.licenciamento ? "Licenciado" : "Não licenciado"));
 	    }
 	}
