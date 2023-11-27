@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Controller.concessionariaController;
 import Model.automovel;
-import Model.concessionariaModel;
+
 
 
 
@@ -52,12 +52,7 @@ public class Menu {
 				System.out.println("                                                     ");
 
 				opcao = leia.nextInt();
-				try {
-					opcao = leia.nextInt();
-				}catch(InputMismatchException e) {
-					System.out.println("\n Digite valores inteiros");
-				}
-
+				
 				if (opcao == 7) {
 					System.out.println("\nObrigado por Escolher a nossa Agencia! Volte sempre!");
 					sobre();
@@ -75,7 +70,6 @@ public class Menu {
 						System.out.println("\n Digite a marca do carro: ");
 						leia.skip("\\R");
 						modelo = leia.nextLine();
-						
 						System.out.println("\n Digite o ano do carro: ");
 						ano = leia.nextInt();
 						System.out.println("\n Digite o nome do titular: ");
@@ -87,8 +81,7 @@ public class Menu {
 							System.out.println(" 2 - NÃO");
 							doc = leia.nextInt();
 						}while(doc < 1 && doc > 2 );
-						System.out.println("Digite o tipo de cambio do carro: ");
-						cambio = leia.nextLine();
+						
 						
 						switch (doc) {
 						case 1:
@@ -102,6 +95,8 @@ public class Menu {
 							carros.cadastrarVeiculo(new automovel(carros.gerarnumero(),modelo,cambio,titular,disponivel, renavam,ano));
 							break;
 						}
+						
+						
 						System.out.println("Carro cadastrado com sucesso!!");
 						keyPress();
 						break;
@@ -111,48 +106,57 @@ public class Menu {
 							keyPress();
 						break;
 					case 3:
-						System.out.println("Consultar dados do Carro - por Renavam\n\n");
+						System.out.println("Consultar dados do Carro - por renavam\n\n");
 						System.out.println("Digite o numero do renavam: ");
 						renavam = leia.nextInt();
 						carros.procurarPorRenavam(renavam);
 						keyPress();
 						break;
 					case 4:
-						System.out.println("Atualizar dados do veiculo\n\n");
+					    System.out.println("Atualizar dados do veiculo\n\n");
+					    System.out.println("Digite o numero do renavam: ");
+					    renavam = leia.nextInt();
+
+					    var buscaCarro = carros.buscarNaCollection(renavam);
+
+					    if (buscaCarro != null) {
+					        leia.nextLine(); // Limpa o buffer
+					        System.out.println("Digite o nome do titular:");
+					        titular = leia.nextLine();
+
+					        System.out.println("Digite ano :");
+					        ano = leia.nextInt();
+
+					        leia.nextLine(); // Limpa o buffer
+					        System.out.println("Digite a marca do carro: ");
+					        modelo = leia.nextLine();
+
+					        do {
+					            System.out.println("Documento do carro está em dia ?");
+					            System.out.println(" 1 - SIM ");
+					            System.out.println(" 2 - NÃO");
+					            doc = leia.nextInt();
+					        } while (doc != 1 && doc != 2);
+
+					        System.out.println("Digite o tipo de cambio do carro: ");
+					        cambio = leia.nextLine();
+
+					        disponivel = (doc == 1);
+					        carros.atualizar(new automovel(carros.gerarnumero(), modelo, cambio, titular, disponivel, renavam, ano));
+					    } else {
+					        System.out.println("Automovel não encontrado!");
+					    }
+					    keyPress();
+					    break;
+					case 5:
+						System.out.println("\n Apagar Conta");
 						System.out.println("Digite o numero do renavam: ");
 						renavam = leia.nextInt();
+						carros.deletar(renavam);
 						
-						var buscaCarro = carros.buscarNaCollection(renavam);
-						
-						if(buscaCarro != null) {
-							System.out.println("Digite o numero do renavam");
-							renavam = leia.nextInt();
-							System.out.println("Digite o nome do titular:");
-							leia.skip("\\R?");
-							titular = leia.nextLine();
-							System.out.println("Digite ano :");
-							ano = leia.nextInt();
-							System.out.println("Digite a marca do carro: ");
-							leia.skip("\\R?");
-							titular = leia.nextLine();
-							do {
-								System.out.println("Documento do carro está em dia ?");
-								System.out.println(" 1 - SIM ");
-								System.out.println(" 2 - NÃO");
-								doc = leia.nextInt();
-							}while(doc < 1 && doc > 2 );
-							System.out.println("Digite o tipo de cambio do carro: ");
-							if(doc == 1) {
-								disponivel = true;
-							}
-							cambio = leia.nextLine();
-							carros.atualizar(new automovel(carros.gerarnumero(),modelo,cambio,titular,disponivel, renavam,ano));
-						}else {
-							System.out.println("Automovel não encontrado!");
-						}
 						keyPress();
-						break;
-					case 5:
+		                 break;
+					case 6:
 						System.out.println("Comprar Carro\n\n");
 						System.out.println("o modelo do carro: ");
 						leia.skip("\\R?");
